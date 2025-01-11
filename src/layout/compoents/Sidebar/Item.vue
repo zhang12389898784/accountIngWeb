@@ -9,11 +9,10 @@
         </Item>
     </el-sub-menu>
     <el-menu-item v-else-if="length == 1" :index="items.children[0]" @click="menuNext(items.children[0].name)">
+        <Icon :icon="items.children[0].meta?.Icon" v-if="items.children[0].meta?.Icon"/>
         <template v-if="items.children[0].meta.title" #title>
-            <Icon :icon="items.children[0].meta?.Icon" v-if="items.children[0].meta?.Icon"/>
         <span class="title">{{ items.children[0].meta.title }}</span>
         </template>
-
     </el-menu-item>
     <el-menu-item v-else :index="title" @click="menuNext(items.name)">
         <template  #title>

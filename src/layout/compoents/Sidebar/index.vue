@@ -6,8 +6,9 @@
         class="el-menu-vertical-demo"
         default-active="2"
         text-color="#fff"
-        :popper-offset="50"
+        :popper-offset="5"
         @open="handleOpen"
+        :collapse="iscollapse"
         @close="handleClose"
       >
       <Item v-for="
@@ -26,8 +27,13 @@ import {
 } from '@element-plus/icons-vue'
 import Item from './Item.vue';
 import {usePermissionStore} from "@/stores/permission"
+import { appStore } from '@/stores/appStore';
 import { computed } from 'vue';
 let store = usePermissionStore()
+let useAppStore = appStore()
+const iscollapse=computed(()=>{
+  return useAppStore.isCollapse
+})
 const noHiddenRoutes=computed(()=>{
   return store.routes.filter(item=>!item.meta?.hidden)
 })
@@ -56,7 +62,7 @@ const handleClose = (key: string, keyPath: string[]) => {
 }
 .el-scrollbar {
   height: 100%;
-  width: 15%;
+  width: auto;
   :deep(.scrollbar-wrapper) {
     // 限制水平宽度
     overflow-x: hidden;
