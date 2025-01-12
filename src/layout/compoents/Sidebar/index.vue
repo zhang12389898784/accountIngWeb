@@ -1,5 +1,5 @@
 <template>
-    <el-scrollbar wrap-class="scrollbar-wrapper">
+
         <el-menu
         active-text-color="#ffd04b"
         background-color="#545c64"
@@ -16,7 +16,6 @@
       :item="item">
       </Item>
       </el-menu>
-    </el-scrollbar>
 </template>
 <script lang="ts" setup>
 import {

@@ -76,22 +76,25 @@ export const router = createRouter({
   routes: constantRoutes
 })
 router.beforeEach((to, from, next) => {
-  if (count === 0) {
+  if(to.path==="/login"|| to.path==="/403"|| to.path==="/404") next()
+  if(sessionStorage.getItem("token")==="true"){
     usePermissionStore().set(constantRoutes)
-    usePermissionStore().addRoutes.forEach(item => {
-      router.addRoute(item)
-    })
-    router.addRoute({
-      path: "/404",
-      component: () => import("@/pages/error/404.vue"),
-      meta: {
-        hidden: true
-      },
-      alias: "/:pathMatch(.*)*"//捕获所有剩余路由
-    })
-  }
-  count++
+  usePermissionStore().addRoutes.forEach(item => {
+    router.addRoute(item)
+  })
+  router.addRoute({
+    path: "/404",
+    component: () => import("@/pages/error/404.vue"),
+    meta: {
+      hidden: true
+    },
+    alias: "/:pathMatch(.*)*"//捕获所有剩余路由
+  })
   appStore().setRouterTitle(to.meta.title as string)
   console.log(usePermissionStore().routes)
   next()
+  }else{
+    next("/login")
+  }
+  
 })

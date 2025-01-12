@@ -1,9 +1,11 @@
 <template>
     <div class="NavigationBar">
-        <div >
+        <div style="padding-left:20px ;">
             <el-icon class="icon" :size="20" @click="toggleClick()"><Operation /></el-icon>
         {{ title }}
         </div>
+        <div></div>
+        <div style="padding-right:20px ;">{{ username }}</div>
     </div>
 </template>
 <script setup lang="ts">
@@ -11,6 +13,7 @@ import { Operation } from '@element-plus/icons-vue'
 import { appStore } from '@/stores/appStore';
 import { useRoute } from 'vue-router';
 import { computed } from 'vue';
+let username=sessionStorage.getItem('username')
 let title=computed(()=>{
     return appStore().routerTitle
 })

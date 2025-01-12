@@ -54,6 +54,8 @@ const submitForm = (formEl: any) => {
     if (!formEl) return;
     formEl.validate((valid: any) => {
         if (valid) {
+            sessionStorage.setItem('token', "true")
+            sessionStorage.setItem('username', loginForm.value.username)
             router.push('/')
         } else {
             console.log('error submit!!');
