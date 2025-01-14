@@ -162,3 +162,33 @@ export const readPageIndexedDB = (page:number, size: number) => {
         };
     })
 }
+export const updateIndexedDB = (data:any) => {
+    const transaction = db.transaction(["myStore"], 'readwrite');
+    const store = transaction.objectStore("myStore");
+    let request = store.put(data);
+    return new Promise((resolve, reject) => {
+        request.onsuccess = function() {
+            resolve('数据更新成功')
+            console.log('数据更新成功')
+          }
+       
+          request.onerror = function() {
+            reject('数据更新失败')
+            console.log('数据更新失败')
+          }
+    })
+}
+export const deleteIndexedDB = (id:any) => {
+    const transaction = db.transaction(["myStore"], 'readwrite');
+    const store = transaction.objectStore("myStore");
+    let request = store.delete(id);
+    return new Promise((resolve, reject) => {
+        request.onsuccess = function() {
+            resolve('数据删除成功')
+          }
+       
+          request.onerror = function() {
+            reject('数据删除失败')
+          }
+    })
+}

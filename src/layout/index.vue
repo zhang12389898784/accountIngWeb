@@ -33,6 +33,7 @@ import NavigationBar from './compoents/NavigationBar/index.vue'
             margin-bottom: 20px;
         }
         .content-body{
+            overflow:hidden;
             flex: 1;
             margin: 0px 20px 20px 20px;
             background-color: rgba(211, 211, 211, 0.1);
