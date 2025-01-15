@@ -7,6 +7,7 @@ import { constantRoutes, router } from './router'
 import { Icon } from '@iconify/vue';
 import { usePermissionStore } from './stores/permission'
 import { initIndexDB } from './indexDB'
+import '@/assets/index.scss'
 const app = createApp(App)
 const pinia = createPinia()
 app.use(ElementPlus)

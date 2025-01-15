@@ -75,6 +75,7 @@ const handleClose = (key: string, keyPath: string[]) => {
   }
 }
 .el-menu-vertical-demo{
+  width: var(--zcx-sider-width);
   height: 100vh;
 }
 </style>

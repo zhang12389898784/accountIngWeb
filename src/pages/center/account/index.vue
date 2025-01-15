@@ -7,6 +7,11 @@
             <el-form-item label="备注" class="search-wrapper-item">
                 <el-input  placeholder="请输入密码"></el-input>
             </el-form-item>
+            <el-form-item  class="search-wrapper-item">
+                <el-button type="primary"  size="middle" @click="handleDialog('新建',formDialogData)">
+                            新建
+            </el-button>
+            </el-form-item>
         </el-form>
     </el-card>
     <el-card>
@@ -43,11 +48,14 @@
     </el-card>
     <el-dialog v-model="dialogVisible" :title="dialogTitle" width="30%">
         <el-form :model="formDialogData" label-width="80px">
+            <el-form-item label="用户名">
+                <el-input v-model="formDialogData.name" placeholder="请输入类型" style="width: 250px;"></el-input>
+            </el-form-item>
             <el-form-item label="类型">
-                <el-input v-model="formDialogData.type" placeholder="请输入类型"></el-input>
+                <el-cascader v-model="formDialogData.type" :options="options" style="width: 250px;"/>
             </el-form-item>
             <el-form-item label="花费">
-                <el-input v-model="formDialogData.cost" placeholder="请输入花费"></el-input>
+                <el-input v-model="formDialogData.cost" placeholder="请输入花费" style="width: 250px;"></el-input>
             </el-form-item>
             <el-form-item label="备注">
                 <el-input v-model="formDialogData.text" placeholder="请输入备注" type="textarea"></el-input>
@@ -79,6 +87,24 @@ let formDialogData = ref({
     type:''
 }
 )
+let options=[
+            {
+                value: '餐饮',
+                label: '餐饮'
+            },
+            {
+                value: '交通',
+                label: '交通'
+            },
+            {
+                value: '购物',
+                label: '购物'
+            },
+            {
+                value: '其他',
+               label: '其他'
+            }
+]
 let formDialogRef=ref()
 let handleSizeChange = () => {
     readPageIndexedDB(currentPage.value, pageSize.value).then((res: any) => {
@@ -140,7 +166,23 @@ let handleDialog = (title: string, data: any) => {
     dialogVisible.value = true;
 }
 let submitEvent = () => {
-    updateIndexedDB(toRaw(formDialogData.value)).then((res: any) => {
+    if(dialogTitle.value=='新建'){
+        let data={
+            cost:formDialogData.value.cost,
+            createTime:(new Date()).toLocaleDateString() + " " + (new Date()).toLocaleTimeString(),
+            name:formDialogData.value.name,
+            text:formDialogData.value.text,
+            type:formDialogData.value.type
+        }
+        addDataIndexedDB(toRaw(data)).then((res: any) => {
+            console.log(res, "res");
+            ElMessage.success('添加成功');
+            handleSizeChange()
+            dialogVisible.value = false;
+        });
+
+    }else if(dialogTitle.value=='修改'){
+        updateIndexedDB(toRaw(formDialogData.value)).then((res: any) => {
         console.log(res, "res");
         ElMessage.success('修改成功');
         dialogTitle.value = '';
@@ -149,6 +191,7 @@ let submitEvent = () => {
     }).catch((err: any) => {
         ElMessage.error('修改失败');
 });
+    }
 }
 let deleteEvent = (id: number) => {
     deleteIndexedDB(id).then((res: any) => {

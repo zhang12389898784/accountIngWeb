@@ -34,15 +34,18 @@ export const addDataIndexedDB = (data: any) => {
     // 3、向仓库添加数据
     let request = store.add(data);
 
-    request.onsuccess = e => {
-        console.log('数据添加成功后触发');
-    };
-    transaction.oncomplete = e => {
-        console.log('所有数据添加完毕后触发');
-    };
-    transaction.onerror = error => {
-        console.log('数据添加失败后触发');
-    };
+    return new Promise((resolve, reject) => {
+        request.onsuccess = e => {
+            console.log('数据添加成功后触发');
+            resolve(e);
+        };
+        transaction.oncomplete = e => {
+            console.log('所有数据添加完毕后触发');
+        };
+        transaction.onerror = error => {
+            console.log('数据添加失败后触发');
+        };
+    })
 }
 export const readDataIndexedDB = () => {
     const transaction = db.transaction(["myStore"], 'readwrite');
