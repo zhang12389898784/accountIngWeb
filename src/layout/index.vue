@@ -4,6 +4,7 @@
         <div class="content">
             <div class="content-header">
                 <NavigationBar></NavigationBar>
+                <TagsView></TagsView>
             </div>
             <div class="content-body">
                <RouterView></RouterView>
@@ -12,6 +13,7 @@
     </div>
 </template>
 <script setup lang="ts">
+import TagsView from './compoents/TagsView/index.vue'
 import Sidebar from './compoents/Sidebar/index.vue'
 import NavigationBar from './compoents/NavigationBar/index.vue'
 </script>
@@ -27,7 +29,6 @@ import NavigationBar from './compoents/NavigationBar/index.vue'
         display: flex;
         flex-direction: column;
         .content-header{
-            height: 60px;
             background-color: #fff;
             box-shadow: var(--el-box-shadow-lighter);
             margin-bottom: 20px;

@@ -79,7 +79,7 @@ router.beforeEach((to, from, next) => {
   if(to.path==="/login"|| to.path==="/403"|| to.path==="/404") next()
   if(sessionStorage.getItem("token")==="true"){
     usePermissionStore().set(constantRoutes)
-  usePermissionStore().addRoutes.forEach(item => {
+    usePermissionStore().addRoutes.forEach(item => {
     router.addRoute(item)
   })
   router.addRoute({

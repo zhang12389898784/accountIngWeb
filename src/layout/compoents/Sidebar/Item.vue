@@ -8,7 +8,7 @@
       item in items.children" :item="item">
         </Item>
     </el-sub-menu>
-    <el-menu-item v-else-if="length == 1" :index="items.children[0]" @click="menuNext(items.children[0].name)">
+    <el-menu-item v-else-if="length == 1" :index="items.children[0].meta.title" @click="menuNext(items.children[0].name)">
         <Icon :icon="items.children[0].meta?.Icon" v-if="items.children[0].meta?.Icon"/>
         <template v-if="items.children[0].meta.title" #title>
         <span class="title">{{ items.children[0].meta.title }}</span>
@@ -26,7 +26,7 @@ import { computed } from 'vue';
 
 const props = defineProps(["itemKey", "item"])
 let title = computed(() => {
-    return props.itemKey
+    return props.item.meta?.title
 })
 let items = computed(() => {
     return props.item

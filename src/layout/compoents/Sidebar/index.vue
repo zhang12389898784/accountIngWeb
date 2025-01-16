@@ -4,12 +4,12 @@
         active-text-color="#ffd04b"
         background-color="#545c64"
         class="el-menu-vertical-demo"
-        default-active="2"
         text-color="#fff"
         :popper-offset="5"
         @open="handleOpen"
         :collapse="iscollapse"
         @close="handleClose"
+        :default-active="defaultActive"
       >
       <Item v-for="
       item in noHiddenRoutes"  
@@ -28,8 +28,13 @@ import Item from './Item.vue';
 import {usePermissionStore} from "@/stores/permission"
 import { appStore } from '@/stores/appStore';
 import { computed } from 'vue';
+import { router } from '@/router';
 let store = usePermissionStore()
 let useAppStore = appStore()
+let defaultActive=computed(()=>{
+  console.log(router.currentRoute.value.meta.title,'ooo')
+  return router.currentRoute.value.meta.title
+})
 const iscollapse=computed(()=>{
   return useAppStore.isCollapse
 })

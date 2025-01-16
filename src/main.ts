@@ -7,9 +7,11 @@ import { constantRoutes, router } from './router'
 import { Icon } from '@iconify/vue';
 import { usePermissionStore } from './stores/permission'
 import { initIndexDB } from './indexDB'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import '@/assets/index.scss'
 const app = createApp(App)
 const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
 app.use(ElementPlus)
 app.use(pinia)
 usePermissionStore().set(constantRoutes)

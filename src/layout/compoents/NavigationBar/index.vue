@@ -49,11 +49,11 @@ const toggleClick = () => {
 }
 
 .NavigationBar {
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 100%;
     background-color: #fff;
     border-bottom: 1px solid #e6e6e6;
 }
