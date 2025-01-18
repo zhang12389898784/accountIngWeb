@@ -59,11 +59,11 @@ export const dynamicRoutes = [
         }
       },
       {
-        path: "/center/user",
-        component: () => import("@/pages/center/user/index.vue"),
-        name: "user",
+        path: "/center/music",
+        component: () => import("@/pages/center/music/index.vue"),
+        name: "music",
         meta: {
-          title: "用户管理",
+          title: "音乐播放",
           affix: true,
           roles: ['admin']
         }
