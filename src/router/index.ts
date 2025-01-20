@@ -60,7 +60,7 @@ export const dynamicRoutes = [
       },
       {
         path: "/center/music",
-        component: () => import("@/pages/center/music/index.vue"),
+        component: () => import("@/pages/center/music/index.vue" as any),
         name: "music",
         meta: {
           title: "音乐播放",
@@ -69,6 +69,16 @@ export const dynamicRoutes = [
         }
       }
     ]
+  },
+  {
+    path: "/music",
+    component: import("@/pages/center/music/components/music.vue" as any),
+    meta: {
+      title: "管理",
+      hidden: true,
+      affix: true,
+      roles: ['admin', "user"]
+    },
   },
 ]
 export const router = createRouter({
