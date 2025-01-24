@@ -55,7 +55,7 @@ $animationDuration: 3s;
     .dot:nth-child(#{$i}){
     transform:rotate((15deg)*$i) translateY(-$containerSize/2);
     &::after,&::before{
-        animation-delay:  calc(#{$animationDuration} * #{$i} / 36*6);
+        animation-delay:  calc(-#{$animationDuration} * #{$i} / 36*6);
     }
 }
 }

@@ -1,21 +1,13 @@
 <template>
-
-        <el-menu
-        active-text-color="#ffd04b"
-        background-color="#545c64"
-        class="el-menu-vertical-demo"
-        text-color="#fff"
-        :popper-offset="5"
-        @open="handleOpen"
-        :collapse="iscollapse"
-        @close="handleClose"
-        :default-active="defaultActive"
-      >
+    <div class="logo">
+        accounting
+    </div>
+    <el-menu class="el-menu-vertical-demo"
+      :popper-offset="5" @open="handleOpen" :collapse="iscollapse" @close="handleClose" :default-active="defaultActive">
       <Item v-for="
-      item in noHiddenRoutes"  
-      :item="item">
+      item in noHiddenRoutes" :item="item">
       </Item>
-      </el-menu>
+    </el-menu>
 </template>
 <script lang="ts" setup>
 import {
@@ -25,25 +17,38 @@ import {
   Setting,
 } from '@element-plus/icons-vue'
 import Item from './Item.vue';
-import {usePermissionStore} from "@/stores/permission"
+import { usePermissionStore } from "@/stores/permission"
 import { appStore } from '@/stores/appStore';
 import { computed } from 'vue';
 import { router } from '@/router';
 let store = usePermissionStore()
 let useAppStore = appStore()
-let defaultActive=computed(()=>{
-  console.log(router.currentRoute.value.meta.title,'ooo')
+let defaultActive = computed(() => {
+  console.log(router.currentRoute.value.meta.title, 'ooo')
   return router.currentRoute.value.meta.title
 })
-const iscollapse=computed(()=>{
+const iscollapse = computed(() => {
   return useAppStore.isCollapse
 })
-const noHiddenRoutes=computed(()=>{
-  return store.routes.filter(item=>!item.meta?.hidden)
+const noHiddenRoutes = computed(() => {
+  return getRoutes(store.routes)
 })
+function getRoutes(routes: typeof store.routes) {
+  let routesClone: typeof store.routes = []
+  routes.forEach(item => {
+    let routesChilds: typeof store.routes[0] | undefined = item
+    if (item.children) {
+      routesChilds.children = getRoutes(item.children)
+    }
+    routesClone.push(routesChilds)
+  })
+  return routesClone.filter(item => {
+    return !item.meta?.hidden
+  })
+}
 console.log(noHiddenRoutes.value)
-noHiddenRoutes.value.forEach(item=>{
-  console.log(item.path,7878)
+noHiddenRoutes.value.forEach(item => {
+  console.log(item.path, 7878)
 })
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
@@ -53,34 +58,20 @@ const handleClose = (key: string, keyPath: string[]) => {
 }
 </script>
 <style scoped lang="scss">
-.scrollbar-demo-item {
+.el-scrollbar {
+}
+.el-menu-vertical-demo {
+  color: #000;
+  background-color: rgb(255, 255, 255,0);
+  width: 100%;
+  height: auto;
+}
+.logo{
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 500px;
-  margin: 0px;
-  text-align: center;
-  border-radius: 4px;
-  background: var(--el-color-primary-light-9);
-  color: var(--el-color-primary);
-}
-.el-scrollbar {
-  height: 100%;
-  width: auto;
-  :deep(.scrollbar-wrapper) {
-    // 限制水平宽度
-    overflow-x: hidden;
-  }
-  // 滚动条
-  :deep(.el-scrollbar__bar) {
-    &.is-horizontal {
-      // 隐藏水平滚动条
-      display: none;
-    }
-  }
-}
-.el-menu-vertical-demo{
-  width: var(--zcx-sider-width);
-  height: 100vh;
+  height: 8%;
+  font-size: large;
+  font-weight: bold;
 }
 </style>
