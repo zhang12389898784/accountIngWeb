@@ -38,7 +38,9 @@ const handleClose = (path: string) => {
 
 // 监听路由变化，自动添加标签页
 router.afterEach((to) => {
-  historyTabs.addTab({ title: to.meta.title as string, path: to.path });
+  if(to.path !== '/login'&& to.path !== '/404'){
+    historyTabs.addTab({ title: to.meta.title as string, path: to.path });
+  }
 });
 </script>
 

@@ -3,7 +3,7 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
-import { constantRoutes, router } from './router'
+import { constantRoutes, dynamicRoutes, router } from './router'
 import { Icon } from '@iconify/vue';
 import { usePermissionStore } from './stores/permission'
 import { initIndexDB } from './indexDB'
@@ -14,7 +14,7 @@ const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 app.use(ElementPlus)
 app.use(pinia)
-usePermissionStore().set(constantRoutes)
+usePermissionStore().set(constantRoutes,dynamicRoutes)
 usePermissionStore().addRoutes.forEach(item => {
   router.addRoute(item)
 })
@@ -29,4 +29,16 @@ router.addRoute({
 app.use(router)
 app.use(initIndexDB)
 app.component('Icon', Icon)
+app.directive('permission',{
+  mounted(el:HTMLElement,binding){
+    console.log(binding.value,el,9494);
+    if(binding.value.includes(sessionStorage.getItem('token'))){
+
+    }
+    else{
+      el.parentElement?.removeChild(el)
+
+    }
+  }
+})
 app.mount('#app')

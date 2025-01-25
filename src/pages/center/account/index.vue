@@ -35,7 +35,7 @@
                             <div class="table-item" v-else>{{ scope.row[item.key] }}</div>
                         </template>
                     </el-table-column>
-                    <el-table-column fixed="right" label="操作" width="150" align="center">
+                    <el-table-column fixed="right" label="操作" width="150" align="center" v-permission="['admin']">
                         <template #default="scope">
                             <el-button type="primary" text bg size="small" @click="handleDialog('修改', scope.row)">
                                 修改
@@ -78,6 +78,7 @@
 <script setup lang="ts">
 import { getCountData } from '@/api';
 import card from '@/components/card/index.vue';
+import cookies from 'js-cookie';
 import { onMounted, reactive, ref, toRaw } from 'vue';
 import { readDataIndexedDB, addDataIndexedDB, deleteDataIndexedDB, fORData, readPageIndexedDB, updateIndexedDB, deleteIndexedDB } from '@/indexDB';
 import { ElMessage } from 'element-plus';
@@ -154,6 +155,14 @@ let tableDataList = [
 ]
 let tableData = ref([])
 onMounted(async () => {
+   let res0= cookies.set('name', 'zhangsan',{
+    sameSite: 'None',
+    secure: true,
+  })
+  console.log("aaaa",res0)
+    getCountData().then((res: any) => {
+
+    });
     readDataIndexedDB()
     console.log("eeee")
     readPageIndexedDB(1, 10).then((res: any) => {
@@ -220,6 +229,7 @@ let deleteEvent = (id: number) => {
     align-items: center;
     margin-bottom: 20px;
     padding: 15px 10px;
+
     &-item {
         display: flex;
         align-items: center;

@@ -99,11 +99,12 @@ export const router = createRouter({
 })
 router.beforeEach((to, from, next) => {
   if (to.path === "/login" || to.path === "/403" || to.path === "/404") next()
-  if (sessionStorage.getItem("token") === "true") {
-    usePermissionStore().set(constantRoutes)
+  if (sessionStorage.getItem("token")) {
+    usePermissionStore().set(constantRoutes,dynamicRoutes)
     usePermissionStore().addRoutes.forEach(item => {
       router.addRoute(item)
     })
+    console.log(usePermissionStore().addRoutes,4141)
     router.addRoute({
       path: "/404",
       component: () => import("@/pages/error/404.vue"),
@@ -112,6 +113,7 @@ router.beforeEach((to, from, next) => {
       },
       alias: "/:pathMatch(.*)*"//捕获所有剩余路由
     })
+    console.log(router,66464)
     appStore().setRouterTitle(to.meta.title as string)
     console.log(usePermissionStore().routes)
     next()

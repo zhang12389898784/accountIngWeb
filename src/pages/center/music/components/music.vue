@@ -26,9 +26,10 @@ channel.onmessage = (e) => {
         document.getElementById('player-container').play()
     }
 }
-onUnmounted(()=>{
+window.onbeforeunload = () => {
+channel.postMessage('close')
    localStorage.removeItem('music')
-})
+}
 onMounted(() => {
     
     let doms = {
