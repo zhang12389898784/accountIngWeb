@@ -1,6 +1,16 @@
 <template>
     <div class="logo">
-        accounting
+      手动阀手动阀
+    </div>
+    <div style="font-size: 12px;
+font-weight: 400;
+letter-spacing: 0px;
+line-height: 19.2px;
+color: rgba(160, 174, 192, 1);
+text-align: left;
+vertical-align: middle;
+margin-left: 25px;">
+      导航
     </div>
     <el-menu class="el-menu-vertical-demo"
       :popper-offset="5" @open="handleOpen" :collapse="iscollapse" @close="handleClose" :default-active="defaultActive">

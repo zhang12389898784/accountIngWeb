@@ -64,7 +64,8 @@ onMounted(() => {
 <style lang="scss" scoped>
 .shell {
     height: 100vh;
-    width: 70vw;
+    width: 100%;
+    max-width: 80vw;
     overflow-x: hidden;
     perspective: 3px;
 }
