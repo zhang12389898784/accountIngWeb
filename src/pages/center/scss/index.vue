@@ -50,9 +50,7 @@ class myPromise {
             this.run()
         })
     }
-    ggg(){
-        
-    }
+    lll(){}
     run() {
         if (this.state === 'pending') {
             return
