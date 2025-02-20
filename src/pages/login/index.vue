@@ -35,7 +35,7 @@
                             </div>
                         </el-form-item>
                         <el-form-item>
-                            <el-button type="primary" @click="submitForm(loginFormRef)">
+                            <el-button type="primary"  @click="submitForm()">
                                 Submit
                             </el-button>
                             <el-button>Reset</el-button>
@@ -47,7 +47,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { User, Lock } from '@element-plus/icons-vue';
 import { router } from '@/router';
 let loginFormRef = ref();
@@ -65,7 +65,8 @@ let loginFormRules = ref({
         { min: 6, max: 10, message: '长度在 6 到10' }
     ]
 })
-const submitForm = (formEl: any) => {
+const submitForm = () => {
+    const formEl = loginFormRef.value;
     if (!formEl) return;
     formEl.validate((valid: any) => {
         if (valid) {

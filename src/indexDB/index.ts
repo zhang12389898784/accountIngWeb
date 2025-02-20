@@ -29,6 +29,7 @@ export const initIndexDB = () => {
     };
 }
 export const addDataIndexedDB = (data: any) => {
+    console.log('addDataIndexedDB',data);
     const transaction = db.transaction(["myStore"], 'readwrite');
     const store = transaction.objectStore("myStore");
     // 3、向仓库添加数据

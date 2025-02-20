@@ -161,7 +161,10 @@ onMounted(async () => {
   })
   console.log("aaaa",res0)
     getCountData().then((res: any) => {
-
+        console.log(res.data instanceof Object, "res1111");
+        Array.prototype.forEach.call(res.data.data, (item: any) => {
+            console.log(item, "item");
+        });
     });
     readDataIndexedDB()
     console.log("eeee")

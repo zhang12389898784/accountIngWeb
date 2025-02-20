@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { usePermissionStore } from '@/stores/permission'
 import { appStore } from '@/stores/appStore'
-import { h } from 'vue'
 let count = 0
 const Layouts = () => import('@/layout/index.vue')
 export const constantRoutes = [
@@ -48,6 +47,7 @@ export const constantRoutes = [
     }
   },
 ]
+let index = "index"
 export const dynamicRoutes = [
   {
     path: "/center",
@@ -76,6 +76,35 @@ export const dynamicRoutes = [
         name: "music",
         meta: {
           title: "音乐播放",
+          affix: true,
+          roles: ['admin']
+        }
+      },
+      {
+        path: "/center/scss",
+        component: () => import(`@/pages/center/scss/${index}.vue` as any),
+        name: "scss",
+        meta: {
+          title: "scss练习",
+          affix: true,
+          roles: ['admin']
+        }
+      },
+      {
+        path: "/center/list",
+        component: () => import("@/pages/center/list/index.vue" as any),
+        name: "list",
+        meta: {
+          title: "虚拟列表",
+          affix: true,
+          roles: ['admin']
+        }
+      },{
+        path: "/center/list1",
+        component: () => import("@/pages/center/list/index.vue" as any),
+        name: "list1",
+        meta: {
+          title: "虚拟列表1",
           affix: true,
           roles: ['admin']
         }

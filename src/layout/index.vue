@@ -32,6 +32,7 @@ import NavigationBar from './compoents/NavigationBar/index.vue'
     .sidebar-container{
         margin: 15px 20px;
         flex-basis: 10%;
+        min-width: 180px;
     }
     .content{
         flex: 1;

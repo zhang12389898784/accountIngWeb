@@ -81,7 +81,7 @@ const handleClose = (key: string, keyPath: string[]) => {
   align-items: center;
   justify-content: center;
   height: 8%;
-  font-size: large;
+  font-size: medium;
   font-weight: bold;
 }
 </style>

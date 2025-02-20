@@ -1,6 +1,6 @@
 <template>
-<div style="width: 100%;justify-content: center;align-items: center;display: flex;">
-    <div class="loading">
+<div style="width: 100vw;justify-content: center;align-items: center;display: flex; height: 100vh;">
+    <div class="loading" style="transform: translateY(-25%);">
     <div v-for="item in 36" class="dot">
     </div>
     </div>
@@ -16,7 +16,6 @@ $animationDuration: 3s;
 .loading {
     width: $containerSize;
     height: $containerSize;
-    margin-top: 50px auto;
     position:relative;
     border-radius: 50%;
     .dot{
@@ -27,7 +26,7 @@ $animationDuration: 3s;
         height: $ballSize;
         margin-left: -$ballSize/2;
         margin-top: -$ballSize/2;
-        perspective: 100px;
+        perspective: 1000px;
         transform-style: preserve-3d;
         &::after{
             content: '';
@@ -64,7 +63,7 @@ $animationDuration: 3s;
         animation-timing-function: ease-in;
     }
     25%{
-        transform: translate3d(0,100%, $ballSize);
+        transform: translate3d(0,100%, -calc($ballSize*20));
         animation-timing-function: ease-out;
     }
     50%{
@@ -72,7 +71,7 @@ $animationDuration: 3s;
         animation-timing-function: ease-in;
     }
     75%{
-        transform: translate3d(0,100%, $ballSize);
+        transform: translate3d(0,100%, calc($ballSize*20));
         animation-timing-function: ease-out;
     }
 
@@ -82,7 +81,7 @@ $animationDuration: 3s;
         animation-timing-function: ease-in;
     }
     25%{
-        transform: translate3d(0,-100%, $ballSize);
+        transform: translate3d(0,-100%, calc($ballSize*20));
         animation-timing-function: ease-out;
     }
     50%{
@@ -90,7 +89,7 @@ $animationDuration: 3s;
         animation-timing-function: ease-in;
     }
     75%{
-        transform: translate3d(0,-100%, $ballSize);
+        transform: translate3d(0,-100%, -calc($ballSize*20));
         animation-timing-function: ease-out;
     }
 
