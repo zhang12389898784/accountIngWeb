@@ -1,5 +1,6 @@
 <template>
     <div>
+        {{ ll }}
         <card class="search-wrapper">
             <el-form :model="formDataHeader" label-width="80px" style="display: flex;">
                 <el-form-item label="用户名" class="search-wrapper-item">
@@ -76,12 +77,39 @@
     </el-dialog>
 </template>
 <script setup lang="ts">
-import { getCountData } from '@/api';
+import { getCountData, webSocket } from '@/api';
 import card from '@/components/card/index.vue';
 import cookies from 'js-cookie';
 import { onMounted, reactive, ref, toRaw } from 'vue';
 import { readDataIndexedDB, addDataIndexedDB, deleteDataIndexedDB, fORData, readPageIndexedDB, updateIndexedDB, deleteIndexedDB } from '@/indexDB';
 import { ElMessage } from 'element-plus';
+let ll=0;
+webSocket(()=>{
+    let res={
+        a:1
+    }
+    console.log(41414)
+    let ress=new Proxy(res,{
+        set(target,key,value, receiver){
+            console.log(target,key,value, receiver,41414);
+            
+            return true
+        },
+        get(target,key,receiver){
+            console.log(target,key,receiver,41414);
+            return 555
+        }
+    })
+    let fn=() => {
+        let aa=ress.a
+        console.log(aa)
+    }
+    let gg=[]
+    fn()
+    gg.push(fn)
+    gg.pop()
+    ll=8888
+})
 let currentPage = ref(1);
 let pageSize = ref(10);
 let size = ref('small');
@@ -160,12 +188,12 @@ onMounted(async () => {
     secure: true,
   })
   console.log("aaaa",res0)
-    getCountData().then((res: any) => {
-        console.log(res.data instanceof Object, "res1111");
-        Array.prototype.forEach.call(res.data.data, (item: any) => {
-            console.log(item, "item");
-        });
-    });
+    // getCountData().then((res: any) => {
+    //     console.log(res.data instanceof Object, "res1111");
+    //     Array.prototype.forEach.call(res.data.data, (item: any) => {
+    //         console.log(item, "item");
+    //     });
+    // });
     readDataIndexedDB()
     console.log("eeee")
     readPageIndexedDB(1, 10).then((res: any) => {

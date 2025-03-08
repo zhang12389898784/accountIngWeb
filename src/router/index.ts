@@ -108,6 +108,24 @@ export const dynamicRoutes = [
           affix: true,
           roles: ['admin']
         }
+      },{
+        path: "/center/slice",
+        component: () => import("@/pages/center/slice/index.vue" as any),
+        name: "slice",
+        meta: {
+          title: "大文件上传",
+          affix: true,
+          roles: ['admin']
+        }
+      },{
+        path: "/center/update",
+        component: () => import("@/pages/center/update/index.vue" as any),
+        name: "update",
+        meta: {
+          title: "全局更新",
+          affix: true,
+          roles: ['admin']
+        }
       }
     ]
   },

@@ -21,7 +21,11 @@ export const initIndexDB = () => {
             console.error('无法获取数据库实例');
         }
         let objectStore=db.createObjectStore('myStore', { keyPath: 'id', autoIncrement: true });
+        
         objectStore.createIndex("link","id", { unique:true});
+        let objectStoreFile=db.createObjectStore('myFile', { keyPath: 'id', autoIncrement: true });
+        
+        objectStoreFile.createIndex("link","id", { unique:true});
         console.log('数据库创建和更新会执行');
     };
     request.onerror = error => {
@@ -194,5 +198,25 @@ export const deleteIndexedDB = (id:any) => {
           request.onerror = function() {
             reject('数据删除失败')
           }
+    })
+}
+export const addDataFileIndexedDB = (data: any) => {
+    console.log('addDataIndexedDB',data);
+    const transaction = db.transaction(["myFile"], 'readwrite');
+    const store = transaction.objectStore("myFile");
+    // 3、向仓库添加数据
+    let request = store.add(data);
+
+    return new Promise((resolve, reject) => {
+        request.onsuccess = e => {
+            console.log('数据添加成功后触发');
+            resolve(e);
+        };
+        transaction.oncomplete = e => {
+            console.log('所有数据添加完毕后触发');
+        };
+        transaction.onerror = error => {
+            console.log('数据添加失败后触发');
+        };
     })
 }
