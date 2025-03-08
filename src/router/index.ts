@@ -98,6 +98,7 @@ export const router = createRouter({
   routes: constantRoutes
 })
 router.beforeEach((to, from, next) => {
+  let aaa=0
   if (to.path === "/login" || to.path === "/403" || to.path === "/404") next()
   if (sessionStorage.getItem("token")) {
     usePermissionStore().set(constantRoutes,dynamicRoutes)
