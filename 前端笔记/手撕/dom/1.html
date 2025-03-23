@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM 操作 1</title>
+</head>
+<body>
+  <button id="btn">点击我</button>
+  <div id="container"></div>
+
+  <script>
+    const btn = document.getElementById('btn')
+    const container = document.getElementById('container')
+    btn.onclick=function(){
+        let p=document.createElement('p')
+        p.innerText='hello world'
+        container.appendChild(p)
+    }
+  </script>
+</body>
+</html>
+要求：
+
+创建一个按钮和一个空的<div>。
+
+当点击按钮时，在<div>中动态添加一个<p>标签，内容为“Hello, DOM!”。

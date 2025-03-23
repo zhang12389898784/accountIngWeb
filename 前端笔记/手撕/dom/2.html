@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM 操作 2</title>
+  <style>
+    #box {
+      width: 200px;
+      height: 200px;
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+    <div id="box"></div>
+
+  <script>
+    const box=document.getElementById('box')
+    box.onmouseover=function(){
+        box.style.backgroundColor='blue'
+    }
+    box.onmouseout=function(){
+        box.style.backgroundColor='red'
+    }
+  </script>
+</body>
+</html>
+创建一个<div>，初始背景颜色为红色。
+当鼠标移动到<div>上时，背景颜色变为蓝色；鼠标移出时恢复红色。

@@ -21,7 +21,8 @@
         <el-card style="opacity: 1;
     border-radius: 24px;
     background: rgba(255, 255, 255, 1);
-    box-shadow: 0px 6px 58px rgba(196, 203, 214, 0.1);">
+    box-shadow: 0px 6px 58px rgba(196, 203, 214, 0.1);"
+    >
             <el-scrollbar max-height="600px" class="scrollbar-wrapper">
                 <el-table :data="tableData" style="width: 100%;margin-bottom: 20px;">
                     <el-table-column v-for="item in tableDataList" :prop="item.key" :label="item.name"
